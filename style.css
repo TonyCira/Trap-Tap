@@ -200,3 +200,90 @@ nav {
   color: #666666;
   margin-bottom: 2rem;
 }
+
+/* --------------------------------
+   STATISTIEKEN
+   -------------------------------- */
+
+/* Grid = raster, auto-fit = vult automatisch de breedte */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-nummer {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e63030;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* --------------------------------
+   KAARTJES
+   -------------------------------- */
+.kaartjes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.kaart {
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.kaart-icoon {
+  width: 36px;
+  height: 36px;
+  background-color: #fff0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.kaart h3 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.kaart p {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* --------------------------------
+   FOOTER
+   -------------------------------- */
+footer {
+  background-color: #111111;
+  padding: 2rem;
+  text-align: center;
+  border-top: 3px solid #e63030;
+  margin-top: 2rem;
+}
+
+footer p {
+  color: #555555;
+  font-size: 13px;
+}
