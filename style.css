@@ -1,0 +1,56 @@
+/* ================================
+   TRAP & TAP — Stijlbestand
+   ================================ */
+
+/* Algemene instellingen */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+/* Navigatiebalk */
+nav {
+  background-color: #111111;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  color: #e63030;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Hero sectie */
+.hero {
+  background-color: #111111;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-bottom: 3px solid #e63030;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.hero p {
+  color: #aaaaaa;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+/* Rode accentkleur */
+.accent {
+  color: #e63030;
+}
