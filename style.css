@@ -446,54 +446,38 @@ footer p {
    VOLGENDE RIT OP HOMEPAGE
    -------------------------------- */
 .volgende-rit-blok {
-  background-color: #111111;
+  background-color: #1a1a1a;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-  border-left: 4px solid #e63030;
+  text-align: center;
+  border: 1px solid #333333;
 }
-
+ 
 .volgende-rit-label {
   font-size: 11px;
   color: #e63030;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
-
+ 
 .volgende-rit-titel {
   font-size: 22px;
   font-weight: bold;
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
-
+ 
 .volgende-rit-info {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
-  margin-top: 0.8rem;
+  justify-content: center;
+  margin-top: 0.4rem;
 }
-
+ 
 .volgende-rit-info span {
-  font-size: 14px;
+  font-size: 13px;
   color: #aaaaaa;
-}
-
-.volgende-rit-knop {
-  display: inline-block;
-  margin-top: 1.2rem;
-  background: none;
-  border: 1px solid #e63030;
-  color: #e63030;
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: Arial, sans-serif;
-}
-
-.volgende-rit-knop:hover {
-  background-color: #e63030;
-  color: #ffffff;
 }
