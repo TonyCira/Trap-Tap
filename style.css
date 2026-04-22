@@ -15,7 +15,9 @@ body {
   color: #1a1a1a;
 }
 
-/* Navigatiebalk */
+/* --------------------------------
+   NAVIGATIE
+   -------------------------------- */
 nav {
   background-color: #111111;
   padding: 0 2rem;
@@ -23,34 +25,178 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 10;
 }
 
 .nav-brand {
   color: #e63030;
   font-size: 20px;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
-/* Hero sectie */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #cccccc;
+  font-size: 14px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+.nav-link:hover {
+  color: #e63030;
+}
+
+.nav-link.actief {
+  color: #e63030;
+}
+
+/* --------------------------------
+   HERO SECTIE
+   -------------------------------- */
 .hero {
   background-color: #111111;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 3.5rem;
   text-align: center;
   border-bottom: 3px solid #e63030;
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.hero-achtergrond {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-inhoud {
+  position: relative;
+  z-index: 2;
 }
 
 .hero h1 {
   color: #ffffff;
   font-size: 40px;
+  margin-bottom: 0.5rem;
 }
 
 .hero p {
   color: #aaaaaa;
   font-size: 16px;
-  margin-top: 1rem;
+  margin-bottom: 1.8rem;
 }
 
-/* Rode accentkleur */
+.hero-badge {
+  display: inline-block;
+  background-color: #e63030;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cccccc;
+  font-size: 14px;
+}
+
+.hero-knop {
+  display: inline-block;
+  margin-top: 1.8rem;
+  background-color: #e63030;
+  color: #ffffff;
+  padding: 11px 26px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+.hero-knop:hover {
+  background-color: #c82020;
+}
+
+/* --------------------------------
+   ANIMATIES
+   -------------------------------- */
+@keyframes draai {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes draai-omgekeerd {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes rijden {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-3px); }
+}
+
+.tandwiel-groot {
+  transform-origin: 420px 110px;
+  animation: draai 8s linear infinite;
+}
+
+.tandwiel-klein {
+  transform-origin: 530px 155px;
+  animation: draai-omgekeerd 4.5s linear infinite;
+}
+
+.fietser {
+  animation: rijden 1.4s ease-in-out infinite;
+}
+
+/* --------------------------------
+   HULPKLASSEN
+   -------------------------------- */
 .accent {
   color: #e63030;
+}
+
+.sectie {
+  padding: 3rem 2rem;
+}
+
+.sectie-titel {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.sectie-ondertitel {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 2rem;
 }
