@@ -155,3 +155,37 @@ function toonRitten() {
     lijst.innerHTML += html;
   });
 }
+
+// --------------------------------
+// VOLGENDE RIT OP HOMEPAGE
+// --------------------------------
+function toonVolgendeRit() {
+  var vandaag = new Date();
+
+  // Zoek de eerste rit die nog niet geweest is
+  var volgende = ritten.find(function(r) {
+    return new Date(r.datum) >= vandaag;
+  });
+
+  // Als er geen volgende rit is, verberg het blok
+  if (!volgende) {
+    document.getElementById('volgende-rit-blok').style.display = 'none';
+    return;
+  }
+
+  // Vul de gegevens in
+  document.getElementById('volgende-rit-bestemming').textContent = volgende.bestemming;
+  document.getElementById('volgende-rit-datum').textContent =
+    volgende.dag + ' ' + volgende.maand + ' 2026';
+  document.getElementById('volgende-rit-km').textContent = volgende.km + ' km';
+
+  var hmElement = document.getElementById('volgende-rit-hm');
+  if (volgende.hm) {
+    hmElement.textContent = volgende.hm + ' hm';
+  } else {
+    hmElement.style.display = 'none';
+  }
+}
+
+// Roep de functie op zodra de pagina geladen is
+toonVolgendeRit();
