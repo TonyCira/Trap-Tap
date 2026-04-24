@@ -59,6 +59,69 @@ var gpxLinks = [
 ];
 
 // --------------------------------
+// HULPFUNCTIES VOOR WEER
+// --------------------------------
+
+// Zet graden om naar kompasrichting
+function gradenNaarKompas(graden) {
+  var richtingen = ['N', 'NO', 'O', 'ZO', 'Z', 'ZW', 'W', 'NW'];
+  var index = Math.round(graden / 45) % 8;
+  return richtingen[index];
+}
+
+// Zet weathercode om naar emoji
+function weerIcoon(code) {
+  if (code === 0) return '☀️';
+  if (code <= 2) return '⛅';
+  if (code <= 3) return '☁️';
+  if (code <= 49) return '🌫️';
+  if (code <= 67) return '🌧️';
+  if (code <= 77) return '❄️';
+  if (code <= 82) return '🌦️';
+  return '⛈️';
+}
+
+// Globale variabele om weerdata bij te houden
+var weerData = null;
+
+// Haal weerdata op van Open-Meteo API
+function haalWeerOp() {
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=50.88&longitude=5.45&daily=temperature_2m_max,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant,weathercode&timezone=Europe/Brussels')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      weerData = data.daily;
+      // Herlaad de agenda en homepage met weerdata
+      toonRitten();
+      toonVolgendeRit();
+    });
+}
+
+// Zoek weerinfo op voor een bepaalde datum
+function getWeerVoorDatum(datum) {
+  if (!weerData) return null;
+  var index = weerData.time.indexOf(datum);
+  if (index === -1) return null;
+  return {
+    temp: weerData.temperature_2m_max[index],
+    regen: weerData.precipitation_probability_max[index],
+    wind: weerData.wind_speed_10m_max[index],
+    windrichting: gradenNaarKompas(weerData.wind_direction_10m_dominant[index]),
+    icoon: weerIcoon(weerData.weathercode[index])
+  };
+}
+
+// Bouw het HTML blokje voor weerinfo
+function weerHtml(weer) {
+  if (!weer) return '';
+  return '<div class="weer-info">' +
+    '<span class="weer-icoon">' + weer.icoon + '</span>' +
+    '<span class="weer-temp">' + weer.temp + '°C</span>' +
+    '<span class="weer-regen">&#127783; ' + weer.regen + '%</span>' +
+    '<span class="weer-wind">&#127788; ' + weer.wind + ' km/h ' + weer.windrichting + '</span>' +
+  '</div>';
+}
+
+// --------------------------------
 // ALLE RITTEN
 // --------------------------------
 var ritten = [
@@ -132,6 +195,7 @@ function bouwFilterKnoppen() {
 function toonRitten() {
   var vandaag = new Date();
   var lijst = document.getElementById('agenda-lijst');
+  if (!lijst) return;
   lijst.innerHTML = '';
   var gefilterd = ritten.filter(function(r) {
     if (actieveFilter === 'alle') return true;
@@ -143,15 +207,17 @@ function toonRitten() {
     var isVerleden = ritDatum < vandaag;
     var isVolgende = !isVerleden && eersteToekoms;
     if (isVolgende) eersteToekoms = false;
-
-    // Google Drive download link op basis van ritnummer (index 0 = rit 1)
     var gpxUrl = gpxLinks[r.rit - 1];
-
     var hmTag = r.hm ? '<span class="tag-hm">' + r.hm + ' hm</span>' : '';
     var volgendLabel = isVolgende ? '<span class="volgende-label">volgende rit</span>' : '';
     var klassen = 'agenda-item';
     if (isVerleden) klassen += ' verleden';
     if (isVolgende) klassen += ' volgende';
+
+    // Weerinfo enkel voor toekomstige ritten binnen 7 dagen
+    var weer = getWeerVoorDatum(r.datum);
+    var weerBlok = (!isVerleden && weer) ? weerHtml(weer) : '';
+
     var html =
       '<div class="' + klassen + '">' +
         '<div class="agenda-datum">' +
@@ -161,6 +227,7 @@ function toonRitten() {
         '<div class="agenda-info">' +
           '<h4>Rit ' + r.rit + ' &mdash; ' + r.bestemming + volgendLabel + '</h4>' +
           '<p>Vertrek 9u00 &middot; Parking Demerstrand, Diepenbeek</p>' +
+          weerBlok +
         '</div>' +
         '<div class="agenda-rechts">' +
           '<span class="tag-km">' + r.km + ' km</span>' +
@@ -187,12 +254,28 @@ function toonVolgendeRit() {
   document.getElementById('volgende-rit-bestemming').textContent = volgende.bestemming;
   document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + ' 2026';
   document.getElementById('volgende-rit-km').textContent = volgende.km + ' km';
+
   var hmElement = document.getElementById('volgende-rit-hm');
   if (volgende.hm) {
     hmElement.textContent = volgende.hm + ' hm';
   } else {
     hmElement.style.display = 'none';
   }
+
+  // GPX download knop
+  var gpxUrl = gpxLinks[volgende.rit - 1];
+  document.getElementById('volgende-rit-gpx').href = gpxUrl;
+
+  // Weerinfo op homepage
+  var weer = getWeerVoorDatum(volgende.datum);
+  var weerContainer = document.getElementById('volgende-rit-weer');
+  if (weer && weerContainer) {
+    weerContainer.innerHTML = weerHtml(weer);
+  }
 }
 
-toonVolgendeRit();
+// --------------------------------
+// OPSTARTEN
+// --------------------------------
+// Haal eerst weerdata op, daarna worden homepage en agenda automatisch bijgewerkt
+haalWeerOp();
