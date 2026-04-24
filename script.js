@@ -243,7 +243,7 @@ function toonRitten() {
 // --------------------------------
 function toonVolgendeRit() {
   var vandaag = new Date();
-  var jaar = new Date().getfullYear();
+  var jaar = new Date().getFullYear();
   var volgende = ritten.find(function(r) {
     return new Date(r.datum) >= vandaag;
   });
@@ -252,7 +252,7 @@ function toonVolgendeRit() {
     return;
   }
   document.getElementById('volgende-rit-bestemming').textContent = volgende.bestemming;
-  document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + jaar;
+  document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + ' ' + jaar;
   document.getElementById('volgende-rit-km').textContent = volgende.km + ' km';
 
   var hmElement = document.getElementById('volgende-rit-hm');
