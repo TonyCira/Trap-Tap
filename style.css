@@ -541,3 +541,54 @@ footer p {
   color: #555555;
 }
 
+/* --------------------------------
+   WEERINFO
+   -------------------------------- */
+.weer-info {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #888888;
+}
+
+.weer-icoon {
+  font-size: 16px;
+}
+
+.weer-temp {
+  color: #e63030;
+  font-weight: bold;
+}
+
+.weer-regen {
+  color: #1a3a8a;
+}
+
+.weer-wind {
+  color: #555555;
+}
+
+/* GPX knop op homepage */
+#volgende-rit-gpx {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 1rem;
+  background: none;
+  border: 1px solid #e63030;
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: #e63030;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#volgende-rit-gpx:hover {
+  background-color: #e63030;
+  color: #ffffff;
+}
+
