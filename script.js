@@ -226,7 +226,6 @@ function toonRitten() {
         '</div>' +
         '<div class="agenda-info">' +
           '<h4>Rit ' + r.rit + ' &mdash; ' + r.bestemming + volgendLabel + '</h4>' +
-          '<p>Vertrek 9u00 &middot; Parking Demerstrand, Diepenbeek</p>' +
           weerBlok +
         '</div>' +
         '<div class="agenda-rechts">' +
@@ -244,6 +243,7 @@ function toonRitten() {
 // --------------------------------
 function toonVolgendeRit() {
   var vandaag = new Date();
+  var jaar = new Date().getfullYear();
   var volgende = ritten.find(function(r) {
     return new Date(r.datum) >= vandaag;
   });
@@ -252,7 +252,7 @@ function toonVolgendeRit() {
     return;
   }
   document.getElementById('volgende-rit-bestemming').textContent = volgende.bestemming;
-  document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + ' 2026';
+  document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + jaar;
   document.getElementById('volgende-rit-km').textContent = volgende.km + ' km';
 
   var hmElement = document.getElementById('volgende-rit-hm');
