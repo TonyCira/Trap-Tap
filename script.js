@@ -245,7 +245,8 @@ function toonVolgendeRit() {
   var vandaag = new Date();
   var jaar = new Date().getFullYear();
   var volgende = ritten.find(function(r) {
-    return new Date(r.datum) >= vandaag;
+    ritEinde.setHours(13,0,0); // rit vervalt om 13u00
+    return ritEinde >= vandaag;
   });
   if (!volgende) {
     document.getElementById('volgende-rit-blok').style.display = 'none';
