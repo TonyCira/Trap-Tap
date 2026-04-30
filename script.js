@@ -245,7 +245,8 @@ function toonVolgendeRit() {
   var vandaag = new Date();
   var jaar = new Date().getFullYear();
   var volgende = ritten.find(function(r) {
-    ritEinde.setHours(13,0,0); // rit vervalt om 13u00
+    var ritEinde = new Date(r.datum);
+    ritEinde.setHours(13, 0, 0);
     return ritEinde >= vandaag;
   });
   if (!volgende) {
@@ -255,19 +256,14 @@ function toonVolgendeRit() {
   document.getElementById('volgende-rit-bestemming').textContent = volgende.bestemming;
   document.getElementById('volgende-rit-datum').textContent = volgende.dag + ' ' + volgende.maand + ' ' + jaar;
   document.getElementById('volgende-rit-km').textContent = volgende.km + ' km';
-
   var hmElement = document.getElementById('volgende-rit-hm');
   if (volgende.hm) {
     hmElement.textContent = volgende.hm + ' hm';
   } else {
     hmElement.style.display = 'none';
   }
-
-  // GPX download knop
   var gpxUrl = gpxLinks[volgende.rit - 1];
   document.getElementById('volgende-rit-gpx').href = gpxUrl;
-
-  // Weerinfo op homepage
   var weer = getWeerVoorDatum(volgende.datum);
   var weerContainer = document.getElementById('volgende-rit-weer');
   if (weer && weerContainer) {
